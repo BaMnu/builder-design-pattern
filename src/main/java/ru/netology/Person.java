@@ -1,32 +1,37 @@
 package ru.netology;
 
-import java.util.*;
+import java.util.Objects;
+import java.util.OptionalInt;
 
 public class Person {
     protected final String name;
     protected final String surname;
     protected OptionalInt age;
     protected String address;
-    protected boolean hasAge;
 
     protected Person(String name, String surname) {
         this.name = name;
         this.surname = surname;
+        hasAge();
+        hasAddress();
     }
 
     protected Person(String name, String surname, OptionalInt age) {
         this(name, surname);
         this.age = age;
+        hasAge();
+        hasAddress();
     }
 
     protected Person(String name, String surname, OptionalInt age, String address) {
         this(name, surname, age);
         this.address = address;
+        hasAge();
+        hasAddress();
     }
 
     protected boolean hasAge() {
-        PersonBuilder builder = new PersonBuilder();
-        return builder.setAge(age.getAsInt()) != null;
+        return this.age != null;
     }
 
     protected void happyBirthday() {
@@ -34,8 +39,7 @@ public class Person {
     }
 
     protected boolean hasAddress() {
-        PersonBuilder builder = new PersonBuilder();
-        return builder.setAddress(address) != null;
+        return this.address != null;
     }
 
     protected void setAddress(String address) {
@@ -59,7 +63,7 @@ public class Person {
     }
 
     protected PersonBuilder newChildBuilder() {
-        return new PersonBuilder().setName(name);
+        return new PersonBuilder().setName(name).setSurname(surname);
     }
 
     @Override
@@ -80,11 +84,21 @@ public class Person {
         } else if (address == null && age != null) {
             sb.append(" (Возраст: ")
                     .append(age.getAsInt())
+                    .append(", Адрес: ")
+                    .append(hasAddress())
                     .append(")");
 
         } else if (age == null && address != null) {
-            sb.append(" (Адрес: ")
+            sb.append(" (Возраст: ")
+                    .append(hasAge())
+                    .append(", Адрес: ")
                     .append(address)
+                    .append(")");
+        } else {
+            sb.append(" (Возраст: ")
+                    .append(hasAge())
+                    .append(", Адрес: ")
+                    .append(hasAddress())
                     .append(")");
         }
         return String.valueOf(sb);

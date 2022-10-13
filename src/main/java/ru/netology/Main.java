@@ -8,7 +8,8 @@ public class Main {
                 .setAge(31)
                 .setAddress("Сидней")
                 .build();
-        mom.happyBirthday();
+//        mom.happyBirthday();
+//        mom.setAddress("Канберра");
         Person son = mom.newChildBuilder()
                 .setName("Антошка")
                 .setSurname("Вольф")

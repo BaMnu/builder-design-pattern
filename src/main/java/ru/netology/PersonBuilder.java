@@ -8,8 +8,6 @@ public class PersonBuilder {
     private String surname;
     private OptionalInt age;
     private String address;
-    private boolean hasAge;
-
 
     public PersonBuilder setName(String name) {
         if (name == null) {
@@ -44,7 +42,6 @@ public class PersonBuilder {
         if (name == null || surname == null) {
             throw new IllegalArgumentException("Person cannot have no name and/or no surname");
         }
-
         return new Person(name, surname, age, address);
     }
 }
